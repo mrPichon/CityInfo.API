@@ -38,6 +38,12 @@ namespace CityInfo.API.Controllers
         [HttpPost]
         public ActionResult<PointOfInterestDto> CreatePointOfInterest(int cityId, PointOfInterestForCreationDto pointOfInterest)
         {
+            // is handled by default for the controller (check validation attributes of the dto object)
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest();
+            //}
+
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
             if (city == null)
             {
