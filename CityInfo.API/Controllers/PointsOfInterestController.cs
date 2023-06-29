@@ -19,7 +19,7 @@ namespace CityInfo.API.Controllers
             return Ok(city.PoinstOfInterest);
         }
 
-        [HttpGet("{pointOfInterestId}")]
+        [HttpGet("{pointOfInterestId}", Name ="GetPointOfInterest")]
         public ActionResult<PointOfInterestDto> GetPointOfInterest(int cityId, int pointOfInterestId)
         {
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
@@ -33,6 +33,35 @@ namespace CityInfo.API.Controllers
                 return NotFound(); 
             }
             return Ok(pointOfInterest);
+        }
+
+        [HttpPost]
+        public ActionResult<PointOfInterestDto> CreatePointOfInterest(int cityId, PointOfInterestForCreationDto pointOfInterest)
+        {
+            var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            // demo - will be inproved
+            var maxPointOfInterestId = CitiesDataStore.Current.Cities.SelectMany(c => c.PoinstOfInterest).Max(p => p.Id);
+            // map onbects
+            var finalPointOfInterest = new PointOfInterestDto()
+            {
+                Id = ++maxPointOfInterestId,
+                Name = pointOfInterest.Name,
+                Description = pointOfInterest.Description
+            };
+
+            city.PoinstOfInterest.Add(finalPointOfInterest);
+
+            // this add a location attribute on the headers response with the url of the new resource
+            return CreatedAtRoute("GetPointOfInterest", new
+            {
+                CityId = cityId,
+                pointOfInterestId = finalPointOfInterest.Id
+            }, finalPointOfInterest);
         }
     }
 }
