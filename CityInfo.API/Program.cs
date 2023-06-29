@@ -8,7 +8,8 @@ builder.Services.AddControllers( options =>
 {
     // Content Negotiation
     options.ReturnHttpNotAcceptable = true; // return 406 when the Accept header is diferent than application/json
-}).AddXmlDataContractSerializerFormatters(); // add suport to Accept xml requests
+}).AddNewtonsoftJson()
+  .AddXmlDataContractSerializerFormatters(); // add suport to Accept xml requests
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
