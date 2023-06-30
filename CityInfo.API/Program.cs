@@ -45,6 +45,11 @@ builder.Services.AddDbContext<CityInfoContext>(
     dbContextOptions => dbContextOptions.UseSqlite(
         builder.Configuration["ConnectionStrings:CityInfoDBConnectionString"]));
 
+// create once by request
+builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>();
+// adding this, you should create the profile forder and class to map
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

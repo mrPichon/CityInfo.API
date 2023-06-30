@@ -8,8 +8,8 @@
 
         public int NumberOfPointOfInterest
         {
-            get { return PoinstOfInterest.Count;}
+            get { return PointsOfInterest.Count;}
         }
-        public ICollection<PointOfInterestDto> PoinstOfInterest { get; set; } = new List<PointOfInterestDto>();
+        public ICollection<PointOfInterestDto> PointsOfInterest { get; set; } = new List<PointOfInterestDto>();
     }
 }
