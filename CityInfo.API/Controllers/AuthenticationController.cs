@@ -83,7 +83,7 @@ namespace CityInfo.API.Controllers
              * 
              * return a new cityInfoUser from DB
              */
-            return new CityInfoUser(1, userName ?? "", "isr", "mino", "gld");
+            return new CityInfoUser(1, userName ?? "", "isr", "mino", "Antwerp");
         }
     }
 }
