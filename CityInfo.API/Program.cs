@@ -37,14 +37,14 @@ builder.Services.AddControllers( options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(setupAction =>
 {
-    setupAction.AddSecurityDefinition(name: "Bearer", securityScheme: new OpenApiSecurityScheme
+    setupAction.AddSecurityDefinition(name: "CityInfoApiBearerAuth", securityScheme: new OpenApiSecurityScheme
     {
-        Name = "Authorization",
-        Description = "Please enter Authorization token",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        BearerFormat = "JWT",
-        Scheme = "Bearer"
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        Description = "Input a valid token to access the API",
+        //In = ParameterLocation.Header,
+        //Name = "Authorization",
+        //BearerFormat = "JWT",
     });
 
     setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -54,11 +54,10 @@ builder.Services.AddSwaggerGen(setupAction =>
             {
                 Reference = new OpenApiReference
                 {
-                    Id = "Bearer",
+                    Id = "CityInfoApiBearerAuth",
                     Type = ReferenceType.SecurityScheme
                 }
-            },
-            new List<string>()
+            }, new List<string>()
         }
     });
 
