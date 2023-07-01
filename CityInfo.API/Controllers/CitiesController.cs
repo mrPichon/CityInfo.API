@@ -9,7 +9,9 @@ namespace CityInfo.API.Controllers
 {
     [ApiController]
     //[Authorize]
-    [Route("api/cities")]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/cities")]
     public class CitiesController : ControllerBase
     {
         private readonly ICityInfoRepository _cityInfoRepository;
@@ -25,6 +27,7 @@ namespace CityInfo.API.Controllers
 
         [HttpGet()]
         // to bound a [FromQuery(Name="filteronname")] string? name
+        [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<CityWithoutPointsOfInterestDto>>> GetCities([FromQuery] string? name, string? searchQuery
             , int pageNumber = 1, int pageSize = 10)
         {
