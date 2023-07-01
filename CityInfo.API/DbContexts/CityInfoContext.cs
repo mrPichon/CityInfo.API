@@ -38,7 +38,7 @@ namespace CityInfo.API.DbContexts
                 {
                     Id= 1,
                     CityId = 1,
-                    Description = "The most vvisited urban park in the United States."
+                    Description = "The most visited urban park in the United States."
                 },
                 new PointOfInterest("Empire State Building")
                 {
